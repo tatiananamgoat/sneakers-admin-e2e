@@ -20,6 +20,7 @@
     "test:users": "playwright test tests/users/",
     "test:cashouts": "playwright test tests/cashouts/",
     "test:other": "playwright test tests/other/",
+    "test:verification": "playwright test tests/verification/",
     "report": "playwright show-report"
   },
   "keywords": [
