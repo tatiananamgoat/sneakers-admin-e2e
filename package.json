@@ -1,0 +1,37 @@
+{
+  "name": "sneakers-admin-e2e",
+  "version": "1.0.0",
+  "description": "E2E tests for Sneakers Admin using Playwright",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "test:debug": "playwright test --debug",
+    "test:orders": "playwright test tests/orders/",
+    "test:fulfillment": "playwright test tests/fulfillment/",
+    "test:pick-queues": "playwright test tests/pick-queues/",
+    "test:instant-ship": "playwright test tests/instant-ship/",
+    "test:lms": "playwright test tests/lms/",
+    "test:products": "playwright test tests/products/",
+    "test:pt": "playwright test tests/pt/",
+    "test:cx": "playwright test tests/cx/",
+    "test:claims": "playwright test tests/claims/",
+    "test:users": "playwright test tests/users/",
+    "test:cashouts": "playwright test tests/cashouts/",
+    "test:other": "playwright test tests/other/",
+    "report": "playwright show-report"
+  },
+  "keywords": [
+    "playwright",
+    "e2e",
+    "testing",
+    "sneakers-admin"
+  ],
+  "author": "tatiana.nam@goat.com",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.58.2"
+  }
+}
