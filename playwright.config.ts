@@ -1,4 +1,30 @@
 import { defineConfig, devices } from '@playwright/test';
+import * as fs from 'fs';
+
+// Check for auth file or CF_ACCESS_TOKEN
+const getStorageState = () => {
+  // First check for auth.json file
+  if (fs.existsSync('./auth.json')) {
+    return './auth.json';
+  }
+  // Fall back to CF_ACCESS_TOKEN env var
+  if (process.env.CF_ACCESS_TOKEN) {
+    return {
+      cookies: [{
+        name: 'CF_Authorization',
+        value: process.env.CF_ACCESS_TOKEN,
+        domain: 'staging.goat.com',
+        path: '/',
+        expires: -1,
+        httpOnly: true,
+        secure: true,
+        sameSite: 'None' as const,
+      }],
+      origins: [],
+    };
+  }
+  return undefined;
+};
 
 export default defineConfig({
   testDir: './tests',
@@ -16,20 +42,8 @@ export default defineConfig({
       username: 'jordan',
       password: 'goat!234',
     },
-    // CF Access token for admin (set CF_ACCESS_TOKEN env var)
-    storageState: process.env.CF_ACCESS_TOKEN ? {
-      cookies: [{
-        name: 'CF_Authorization',
-        value: process.env.CF_ACCESS_TOKEN,
-        domain: 'staging.goat.com',
-        path: '/',
-        expires: -1,
-        httpOnly: true,
-        secure: true,
-        sameSite: 'None' as const,
-      }],
-      origins: [],
-    } : undefined,
+    // Use saved auth state or CF_ACCESS_TOKEN
+    storageState: getStorageState(),
   },
   projects: [
     {
